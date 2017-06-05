@@ -1,16 +1,9 @@
 module.exports = function (app) {
     app.get('/formulario_inclusao_noticia', function (req, res) {
-        res.render('admin/form_add_noticia')
+        app.app.controllers.admin.formulario_inclusao_noticia(app, req, res);
     });
 
     app.post('/noticias/salvar', function (req, res) {
-        var formData = req.body;
-
-        var connection = app.config.dbConnection();
-        var noticiasModel = new app.app.models.noticiasDAO(connection);
-
-        noticiasModel.salvarNoticia(formData, function (error, result) {
-            res.redirect('/noticias');
-        });
+        app.app.controllers.admin.noticias_salvar(app, req, res);
     });
 }
